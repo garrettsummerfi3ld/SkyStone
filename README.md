@@ -27,9 +27,12 @@ Recommends:
 
 * Q: What is this repo?
     * A: This repo is to test and break things form the official repo from FTC for SkyStone, this shouldn't be used as a daily driver for software, if you do happen to use it for such then you should switch to another fork or create your own
- 
+
 * Q: The app isn't building in IntelliJ/Android Studio!
     * A: Open "Files" > "Settings" > "Android (Experimental)" > Uncheck "Only sync active variant"
 
+* Q: What do you use to develop this repo?
+    * A: [JetBrains IntelliJ](https://www.jetbrains.com/idea/), [Android Studio](https://developer.android.com/studio) will work with this repo as well
+
 * Q: There is an issue with this repo!
-    * A: Open a bug report [here!](https://github.com/garrettsummerfi3ld/SkyStone-Dev/issues/new/choose)
+    * A: Open a bug report [here!](https://github.com/garrettsummerfi3ld/SkyStone-Dev/issues/new/choose)    

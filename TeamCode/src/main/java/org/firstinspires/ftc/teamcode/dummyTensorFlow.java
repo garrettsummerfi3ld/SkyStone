@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.annotation.SuppressLint;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class dummyTensorFlow extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Stone";
     private static final String LABEL_SECOND_ELEMENT = "Skystone";
+    private ElapsedTime runtime = new ElapsedTime();
 
     /*
      * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
@@ -54,6 +57,7 @@ public class dummyTensorFlow extends LinearOpMode {
      */
     private TFObjectDetector tfod;
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void runOpMode() {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
@@ -61,9 +65,13 @@ public class dummyTensorFlow extends LinearOpMode {
         initVuforia();
 
         if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
+            telemetry.addData("Status", "Initializing TFOD...");
             initTfod();
+            telemetry.addData("Status", "TFOD Initialized!");
+            telemetry.update();
         } else {
             telemetry.addData("Sorry!", "This device is not compatible with TFOD");
+            telemetry.update();
         }
 
         /*
@@ -115,13 +123,18 @@ public class dummyTensorFlow extends LinearOpMode {
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          */
+        telemetry.addData("VUFR STATUS", "Started VUFR init...");
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraDirection = CameraDirection.BACK;
+        telemetry.addData("VURF STATUS", "Set VUFR parameters for VUFR");
+        telemetry.addData("VUFR STATUS", "Parameters:'\n' (.%2f)", parameters);
 
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
+        telemetry.addData("VUFR STATUS", "Set parameters for creating instance of VUFR");
+        telemetry.update();
 
         // Loading trackables is not necessary for the TensorFlow Object Detection engine.
     }
@@ -130,11 +143,23 @@ public class dummyTensorFlow extends LinearOpMode {
      * Initialize the TensorFlow Object Detection engine.
      */
     private void initTfod() {
+        telemetry.addData("TFOD STATUS", "Starting TFOD init...");
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
                 "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        telemetry.addData("TFOD STATUS", "TFOD Monitor id (%.2f)", tfodMonitorViewId);
+
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
+        telemetry.addData("TFOD STATUS", "Set new parameters for TFOD");
+
         tfodParameters.minimumConfidence = 0.8;
+        telemetry.addData("TFOD STATUS", "Confidence: (%.2f)", tfodParameters.minimumConfidence);
+
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        telemetry.addData("TFOD STATUS", "Set TFOD paramters to 'tfod'");
+        telemetry.addData("TFOD STATUS", "Parameters:'\n'(.%2f)", tfod);
+
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT);
+        telemetry.addData("TFOD STATUS", "Loaded assets for models!");
+        telemetry.update();
     }
 }
