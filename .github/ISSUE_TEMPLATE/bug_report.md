@@ -6,6 +6,7 @@ labels: bug
 assignees: garrettsummerfi3ld
 
 ---
+# Bug Report
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -23,7 +24,13 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Smartphone (please complete the following information):**
+**Driver Station:**
+ - Device: [e.g. Nexus5, Moto e5]
+ - OS: [e.g. Android 8.0]
+ - Version [e.g. 5.3]
+ - Commit: 
+
+**Robot Controller**
  - Device: [e.g. Nexus5, Moto e5]
  - OS: [e.g. Android 8.0]
  - Version [e.g. 5.3]

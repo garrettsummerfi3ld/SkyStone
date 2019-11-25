@@ -70,7 +70,7 @@ public class dummyTensorFlow extends LinearOpMode {
             telemetry.addData("Status", "TFOD Initialized!");
             telemetry.update();
         } else {
-            telemetry.addData("Sorry!", "This device is not compatible with TFOD");
+            telemetry.addData("Status", "This device is not compatible with TFOD");
             telemetry.update();
         }
 
@@ -79,6 +79,7 @@ public class dummyTensorFlow extends LinearOpMode {
           Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          */
         if (tfod != null) {
+
             tfod.activate();
         }
 
@@ -87,6 +88,8 @@ public class dummyTensorFlow extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
+        // I have no idea how this is even possible. This is the worst.
+        // There is no way it should be like this to begin with.
         if (opModeIsActive()) {
             while (opModeIsActive()) {
                 if (tfod != null) {
