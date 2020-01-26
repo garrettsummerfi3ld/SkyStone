@@ -60,8 +60,7 @@ public class dummyTensorFlow extends LinearOpMode {
     @SuppressLint("DefaultLocale")
     @Override
     public void runOpMode() {
-        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
-        // first.
+        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that first.
         initVuforia();
 
         if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
@@ -79,8 +78,9 @@ public class dummyTensorFlow extends LinearOpMode {
           Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
          */
         if (tfod != null) {
-
+            telemetry.addData("Status","Activating TFOD...");
             tfod.activate();
+            telemetry.addData("Status","TFOD Activated!");
         }
 
         /* Wait for the game to begin */
@@ -131,7 +131,7 @@ public class dummyTensorFlow extends LinearOpMode {
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraDirection = CameraDirection.BACK;
-        telemetry.addData("VURF STATUS", "Set VUFR parameters for VUFR");
+        telemetry.addData("VUFR STATUS", "Set VUFR parameters for VUFR");
         telemetry.addData("VUFR STATUS", "Parameters:'\n' (.%2f)", parameters);
 
         //  Instantiate the Vuforia engine
@@ -139,7 +139,7 @@ public class dummyTensorFlow extends LinearOpMode {
         telemetry.addData("VUFR STATUS", "Set parameters for creating instance of VUFR");
         telemetry.update();
 
-        // Loading trackables is not necessary for the TensorFlow Object Detection engine.
+        // Loading traceable is not necessary for the TensorFlow Object Detection engine.
     }
 
     /*
